@@ -2,14 +2,14 @@
 
 import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
-import * as remarkGfm from 'remark-gfm';
+import remarkGfm from 'remark-gfm';
 
 export default function AssistantPage() {
-  const [markdown] = useState(`# Welcome!\n\n- [x] Task one\n- [ ] Task two`);
+  const [markdown] = useState('**Welcome to Smart Travel!**');
 
   return (
     <div className="p-6">
-      <ReactMarkdown remarkPlugins={[remarkGfm.default]}>
+      <ReactMarkdown remarkPlugins={[remarkGfm]}>
         {markdown}
       </ReactMarkdown>
     </div>
