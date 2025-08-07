@@ -28,8 +28,7 @@ const nextConfig = {
   // Experimental features
   experimental: {
     // Enable server components where applicable
-    serverActions: true,
-    // Optimize CSS
+ 
     optimizeCss: true,
     // Optimize package imports
     optimizePackageImports: [
