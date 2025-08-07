@@ -11,8 +11,29 @@ const PerformanceMonitor = dynamic(() => import('@/components/PerformanceMonitor
 });
 
 export const metadata: Metadata = {
-  title: 'Smart Travel - Luxury Planning',
-  description: 'Plan your luxury travel experiences with AI assistance',
+  title: "Smart Travel AI - Luxury Planning",
+  description: "Plan luxury trips in seconds with AI. Personalized itineraries, real-time data, beautiful UX.",
+  openGraph: {
+    title: "Smart Travel AI - Luxury Planning",
+    description: "Plan luxury trips in seconds with AI. Personalized itineraries, real-time data, beautiful UX.",
+    url: "https://smart-travel-ai.vercel.app",
+    siteName: "Smart Travel AI",
+    images: [
+      {
+        url: "https://smart-travel-ai.vercel.app/launch.png",
+        width: 1200,
+        height: 630,
+        alt: "Smart Travel AI - Hero Screenshot",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Smart Travel AI - Luxury Planning",
+    description: "AI-powered luxury travel planning platform. Instant itineraries. Beautiful UX.",
+    images: ["https://smart-travel-ai.vercel.app/launch.png"],
+  },
 };
 
 export default function RootLayout({
