@@ -1,15 +1,17 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  PaperAirplaneIcon,
-  SparklesIcon,
-  ArrowDownCircleIcon,
-  MicrophoneIcon,
-} from '@heroicons/react/24/outline';
+import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import { format } from 'date-fns';
+import * as remarkGfm from 'remark-gfm';
 
-// Rest of your file content...
+export default function AssistantPage() {
+  const [markdown] = useState(`# Welcome!\n\n- [x] Task one\n- [ ] Task two`);
+
+  return (
+    <div className="p-6">
+      <ReactMarkdown remarkPlugins={[remarkGfm.default]}>
+        {markdown}
+      </ReactMarkdown>
+    </div>
+  );
+}
