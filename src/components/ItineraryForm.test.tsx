@@ -11,10 +11,10 @@ vi.mock('next/navigation', () => ({
 
 // Mock localStorage
 const mockLocalStorage = (() => {
-  let store = {};
+  let store: Record<string, string> = {};
   return {
-    getItem: vi.fn((key) => store[key] || null),
-    setItem: vi.fn((key, value) => {
+    getItem: vi.fn((key: string) => store[key] || null),
+    setItem: vi.fn((key: string, value: string) => {
       store[key] = value.toString();
     }),
     clear: vi.fn(() => {

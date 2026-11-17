@@ -6,7 +6,7 @@ import { useState, useEffect, useRef, useCallback, KeyboardEvent, RefObject } fr
  * Hook for handling keyboard navigation
  */
 export function useKeyboardNavigation(
-  refs: RefObject<HTMLElement>[],
+  refs: RefObject<HTMLElement | null>[],
   options: {
     horizontal?: boolean;
     vertical?: boolean;
@@ -71,7 +71,7 @@ export function useKeyboardNavigation(
 /**
  * Hook to determine if an element is in the viewport
  */
-export function useInView(ref: RefObject<HTMLElement>, options = {}) {
+export function useInView(ref: RefObject<HTMLElement | null>, options = {}) {
   const [isInView, setIsInView] = useState(false);
   
   useEffect(() => {
@@ -97,7 +97,7 @@ export function useInView(ref: RefObject<HTMLElement>, options = {}) {
 /**
  * Hook for handling focus trap within a container
  */
-export function useFocusTrap(containerRef: RefObject<HTMLElement>, isActive = true) {
+export function useFocusTrap(containerRef: RefObject<HTMLElement | null>, isActive = true) {
   useEffect(() => {
     if (!isActive || !containerRef.current) return;
     
@@ -143,7 +143,7 @@ export function useFocusTrap(containerRef: RefObject<HTMLElement>, isActive = tr
  * Hook for handling mobile touch gestures
  */
 export function useSwipeGesture(
-  ref: RefObject<HTMLElement>,
+  ref: RefObject<HTMLElement | null>,
   {
     onSwipeLeft,
     onSwipeRight,

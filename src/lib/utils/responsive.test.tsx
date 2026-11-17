@@ -26,7 +26,7 @@ vi.mock('next/navigation', () => ({
 
 // Mock localStorage
 const mockLocalStorage = (() => {
-  let store = {
+  let store: Record<string, string> = {
     'itineraryFormData': JSON.stringify({
       destination: "Paris",
       startDate: "2024-04-01",
@@ -41,8 +41,8 @@ const mockLocalStorage = (() => {
   };
   
   return {
-    getItem: vi.fn((key) => store[key] || null),
-    setItem: vi.fn((key, value) => {
+    getItem: vi.fn((key: string) => store[key] || null),
+    setItem: vi.fn((key: string, value: string) => {
       store[key] = value.toString();
     }),
     clear: vi.fn(() => {

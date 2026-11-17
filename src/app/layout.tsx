@@ -3,12 +3,8 @@ import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import { ThemeProvider } from '@/lib/ThemeContext';
 import { FormProvider } from '@/lib/FormContext';
-import dynamic from 'next/dynamic';
 
-// Import PerformanceMonitor with no SSR to avoid hydration issues
-const PerformanceMonitor = dynamic(() => import('@/components/PerformanceMonitor'), { 
-  ssr: false 
-});
+import PerformanceMonitor from '@/components/PerformanceMonitor';
 
 export const metadata: Metadata = {
   title: "Smart Travel AI - Luxury Planning",

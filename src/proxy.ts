@@ -6,14 +6,15 @@ const rateLimit = new Map<string, { count: number; timestamp: number }>();
 const RATE_LIMIT = 10; // requests
 const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   // Only apply to API routes
   if (!request.nextUrl.pathname.startsWith('/api/')) {
     return NextResponse.next();
   }
 
   // Get client IP
-  const ip = request.ip ?? '127.0.0.1';
+  // (Vercel puts the client's address first in x-forwarded-for)
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0].trim() || '127.0.0.1';
 
   // Check rate limit
   const now = Date.now();
