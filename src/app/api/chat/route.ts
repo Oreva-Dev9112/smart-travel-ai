@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
+import { OPENAI_MODEL } from "@/lib/openaiModel";
 
 // Sample responses for demo mode when OpenAI API is not available
 const sampleResponses = [
@@ -36,7 +37,7 @@ export async function POST(request: Request) {
 
     // If OpenAI is configured, use the API
     const chatCompletion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo", // Using a more widely available model
+      model: OPENAI_MODEL,
       messages: [
         {
           role: "system",

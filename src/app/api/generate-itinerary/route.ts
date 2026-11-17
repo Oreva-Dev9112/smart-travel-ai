@@ -3,6 +3,7 @@ import type { NextRequest } from 'next/server';
 import type { ItineraryRequest } from '@/lib/validations/itinerary';
 import type { ItineraryResponse, ApiError, Location, WeatherData, Event, PointOfInterest } from '@/lib/types/itinerary';
 import OpenAI from 'openai';
+import { OPENAI_MODEL } from "@/lib/openaiModel";
 import { createHash } from 'crypto';
 
 // Simple in-memory cache with expiration
@@ -380,7 +381,7 @@ async function POST(request: Request) {
     const end = new Date(endDate);
     const daysDiff = Math.ceil((end.getTime() - start.getTime()) / (1000 * 3600 * 24)) + 1;
     
-    // Format data for GPT-4
+    // Format data for the model
     // Format events for more readability
     const formattedEvents = eventsData.map(event => ({
       id: event.id,
@@ -419,7 +420,7 @@ async function POST(request: Request) {
       condition: day.day.condition.text
     }));
 
-    process.env.NODE_ENV !== "production" && console.log('Generating itinerary with GPT-4...');
+    process.env.NODE_ENV !== "production" && console.log(`Generating itinerary with ${OPENAI_MODEL}...`);
     
     // Build a comprehensive system message
     const systemMessage = `You are an expert travel planner with deep knowledge of destinations worldwide. 
@@ -431,8 +432,7 @@ Follow these key principles:
 4. Provide specific venue names and locations, not generic suggestions`;
     
     const chatCompletion = await openai.chat.completions.create({
-      model: "gpt-4",
-      temperature: 0.7,
+      model: OPENAI_MODEL,
       messages: [
         { role: "system", content: systemMessage },
         { role: "user", content: `Create a detailed travel itinerary for ${travelers} travelers to ${destination}.
@@ -497,7 +497,7 @@ IMPORTANT INSTRUCTIONS:
     const itineraryContent = chatCompletion.choices[0].message.content;
     const generatedItinerary = JSON.parse(itineraryContent || '{}');
     
-    process.env.NODE_ENV !== "production" && console.log('Successfully generated itinerary with GPT-4');
+    process.env.NODE_ENV !== "production" && console.log('Successfully generated itinerary');
     
     // Prepare response data
     const responseData = {
